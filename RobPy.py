@@ -121,8 +121,12 @@ def matriz_rotacao_x(theta: float) -> np.ndarray:
     :param theta: ângulo de rotação
     :return: matriz de rotação
     """
-    pass
-
+    "pass"
+    s = np.sin(theta)
+    c = np.cos(theta)
+    return np.array([[1, 0, 0], 
+                     [0, c, s], 
+                     [0, -s, c]])
 
 def matriz_rotacao_y(theta: float) -> np.ndarray:
     """
@@ -131,7 +135,12 @@ def matriz_rotacao_y(theta: float) -> np.ndarray:
     :param theta: ângulo de rotação
     :return: matriz de rotação
     """
-    pass
+    "pass"
+    s = np.sin(theta)
+    c = np.cos(theta)
+    return np.array([[c, 0, -s], 
+                     [0, 1, 0], 
+                     [s, 0, c]])
 
 
 def matriz_rotacao_z(theta: float) -> np.ndarray:
@@ -141,7 +150,12 @@ def matriz_rotacao_z(theta: float) -> np.ndarray:
     :param theta: ângulo de rotação
     :return: matriz de rotação
     """
-    pass
+    "pass"
+    s = np.sin(theta)
+    c = np.cos(theta)
+    return np.array([[c, s, 0], 
+                     [-s, c, 0], 
+                     [0, 0, 1]])
 
 
 # Parte 3
@@ -153,6 +167,8 @@ def checa_vetor4(v: np.ndarray) -> None:
     :param v: vetor a verificar
     :return: nenhum.
     """
+    if v.shape != (4, 1):
+        raise ValueError('O vetor deveria ser 4x1')
     pass
 
 
@@ -162,6 +178,8 @@ def checa_matriz33(m: np.ndarray) -> None:
     :param m: matriz a verificar
     :return: nenhum.
     """
+    if m.shape != (3, 3):
+        raise ValueError('O vetor deveria ser 3x3')
     pass
 
 
@@ -171,6 +189,8 @@ def checa_matriz44(m: np.ndarray) -> None:
     :param m: matriz a verificar
     :return: nenhum.
     """
+    if m.shape != (4, 4):
+        raise ValueError('O vetor deveria ser 4x4')
     pass
 
 
@@ -180,6 +200,7 @@ def cria_vetor4(v3: np.ndarray) -> np.ndarray:
     :param v3:
     :return:
     """
+    return np.asarray([v3]).T
     pass
 
 
