@@ -124,7 +124,7 @@ def matriz_rotacao_x(theta: float) -> np.ndarray:
     "pass"
     s = np.sin(theta)
     c = np.cos(theta)
-    return np.array([[1, 0, 0], 
+    return np.asarray([[1, 0, 0], 
                      [0, c, s], 
                      [0, -s, c]])
 
@@ -138,7 +138,7 @@ def matriz_rotacao_y(theta: float) -> np.ndarray:
     "pass"
     s = np.sin(theta)
     c = np.cos(theta)
-    return np.array([[c, 0, -s], 
+    return np.asarray([[c, 0, -s], 
                      [0, 1, 0], 
                      [s, 0, c]])
 
@@ -153,7 +153,7 @@ def matriz_rotacao_z(theta: float) -> np.ndarray:
     "pass"
     s = np.sin(theta)
     c = np.cos(theta)
-    return np.array([[c, s, 0], 
+    return np.asarray([[c, s, 0], 
                      [-s, c, 0], 
                      [0, 0, 1]])
 
@@ -200,7 +200,7 @@ def cria_vetor4(v3: np.ndarray) -> np.ndarray:
     :param v3:
     :return:
     """
-    return np.asarray([v3]).T
+    return np.vstack((v3, 1))
     pass
 
 
