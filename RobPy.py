@@ -25,6 +25,7 @@ def checa_vetor3(v: np.ndarray) -> None:
     """
     if v.shape != (3, 1):
         raise ValueError('O vetor deveria ser 3x1')
+    pass
 
 
 def produto_escalar(v1: np.ndarray, v2: np.ndarray) -> float:
@@ -37,7 +38,6 @@ def produto_escalar(v1: np.ndarray, v2: np.ndarray) -> float:
     checa_vetor3(v1)
     checa_vetor3(v2)
     aux = v1.T @ v2
-
     return float(aux[0][0])
 
 
@@ -57,6 +57,12 @@ def tamanho_proj_vetores(v1: np.ndarray, v2: np.ndarray) -> float:
     :param v2: vetor (np.ndarray) coluna de 3 elementos
     :return: escalar: tamanho da projeção de v1 sobre v2
     """
+    produto_escalar = np.dot(v1, v2)
+    norma_v2_quadrado = np.dot(v2, v2)
+    if norma_v2_quadrado == 0:
+        raise ValueError("O vetor v2 não pode ter norma zero.")
+    tamanho_proj = produto_escalar / norma_v2_quadrado
+    return tamanho_proj
     pass
 
 
@@ -67,6 +73,13 @@ def proj_vetores(v1: np.ndarray, v2: np.ndarray) -> np.ndarray:
     :param v2: vetor (np.ndarray) coluna de 3 elementos
     :return: vetor (np.ndarray) coluna de 3 elementos com o resultado da projeção
     """
+    produto_escalar = np.dot(v1, v2)
+    norma_v2_quadrado = np.dot(v2, v2)
+    if norma_v2_quadrado == 0:
+        raise ValueError("O vetor v2 não pode ter norma zero.")
+    fator = produto_escalar / norma_v2_quadrado
+    vetor_projecao = fator * v2
+    return vetor_projecao
     pass
 
 
@@ -77,6 +90,14 @@ def ang_vetores(v1: np.ndarray, v2: np.ndarray) -> np.ndarray:
     :param v2: vetor (np.ndarray) coluna de 3 elementos
     :return: escalar: ângulo em radianos
     """
+    produto_escalar = np.dot(v1.flatten(), v2.flatten())
+    norma_v1 = np.linalg.norm(v1)
+    norma_v2 = np.linalg.norm(v2)
+    if norma_v1 == 0 or norma_v2 == 0:
+        raise ValueError("As normas dos vetores não podem ser zero.")
+    cos_theta = produto_escalar / (norma_v1 * norma_v2)
+    angulo_radianos = np.arccos(cos_theta)
+    return angulo_radianos
     pass
 
 
@@ -87,6 +108,12 @@ def produto_vetorial(v1: np.ndarray, v2: np.ndarray) -> np.ndarray:
     :param v2: vetor (np.ndarray) coluna de 3 elementos
     :return: vetor (np.ndarray) coluna de 3 elementos com o resultado de v1 x v2
     """
+    if v1.shape != (3, 1) or v2.shape != (3, 1):
+        raise ValueError("Os vetores devem ser colunas de 3 elementos.")
+    
+    produto = np.cross(v1.flatten(), v2.flatten())
+    resultado = produto.reshape(3, 1)
+    return resultado
     pass
 
 
@@ -111,6 +138,13 @@ def plota_vetor3(v: np.ndarray,
     :param kwargs: parâmetros padrão do plot.
     :return: lista de elementos de linha do vetor plotado.
     """
+    vx, vy, vz = v.flatten()
+    vo_x, vo_y, vo_z = vo.flatten()
+    x = [vo_x, vo_x + vx]
+    y = [vo_y, vo_y + vy]
+    z = [vo_z, vo_z + vz]
+    line = ax.plot(x, y, z, *args, zdir=zdir, **kwargs)
+    return line
     pass
 
 
@@ -212,6 +246,12 @@ def checa_matriz_rotacao(m3: np.ndarray, det_tol: float = 0.01) -> None:
     :param det_tol: tolerância do valor do determinante
     :return: não há
     """
+    if det_tol < 0:
+        raise ValueError("O valor da tolerância do determinante deve ser positivo")
+    checa_matriz33(m3)
+    erro = np.abs(1-np.linalg.det(m3))
+    if erro > det_tol:
+        raise ValueError("Pelo valor do determinante, esta matriz não é de rotação")
     pass
 
 
