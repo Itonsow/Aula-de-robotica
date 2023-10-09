@@ -2,6 +2,11 @@
 git add .
 atualiza com os arquivos do git
 '''
+
+'''
+git commit -n "msg"
+git push origin master
+'''
 import numpy as np
 import RobPy as rp
 
