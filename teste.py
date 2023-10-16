@@ -22,5 +22,4 @@ M = rp.matriz_rotacao_x(43*np.pi/180)
 r = rp.cria_vetor3([2, 3, 1])
 
 T = rp.cria_operador4(M, r)
-
 print(T)
